@@ -1,0 +1,89 @@
+:root{
+    --main-c: #103F6E;
+    --white-c: #fff;
+    --gray-c: #999;
+    --gray-200-c: rgb(194, 194, 194);
+    --indigo-c: #5867D3;
+    --red-c: #dc3545;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+*{
+    font-family: 'Rubik', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.c-text-bg-main{
+    background-color: var(--main-c);
+    color: var(--white-c);
+}
+.c-text-bg-white{
+    background-color: var(--white-c);
+    color: var(--main-c);
+}
+.c-label{
+    color: var(--gray-c);
+    font-weight: 500;
+}
+.c-input{
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 14px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid var(--gray-200-c);
+}
+.c-input:focus, .c-input:active{
+    border: none;
+}
+.c-button{
+    background-color: var(--indigo-c);
+    color: var(--white-c);
+}
+.c-infortext{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 14px;
+}
+.c-linkhref a{
+    text-decoration: none;
+}
+.c-linkhref a:hover, .c-linkhref a:active{
+    width: 80px;
+}
+.c-container-right{
+    position: relative;
+    overflow: hidden;
+    background-image: url("./asset/images/flower.svg");
+    background-size: 300px;
+    background-repeat: no-repeat;
+    background-position: 300px 500px;
+}
+.c-btn-danger{
+    border-radius: 30px;
+    width: 160px;
+}
+.c-modal{
+    --bs-modal-width: 300px;
+}
+.c-modal-content{
+    margin: auto;
+    transform: translate(50%,50%);
+}
+.c-danger-label{
+    color: var(--red-c);
+}
+.c-danger-input{
+    border-bottom: 1px solid var(--red-c);
+}
+
+@media screen and (max-width: 992px) { 
+    .c-container-right{
+        background-position: 600px 300px;
+    }
+}
