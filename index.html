@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>VA Kruskal editor</title>
+    <link rel="shortcut icon" href="graphImage.svg" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="footer.css">
+</head>
+
+<body>
+    <div class="header" id="header">
+        <div class="header__box">
+            <div class="header__left">
+                <img src="kruskalC.svg" alt="KRU" style="width: 200px;">
+            </div>
+            <div class="header__right">
+                <a href="#help" id="a-help">Help</a>
+            </div>
+        </div>
+    </div>
+    <div id="controller" class="controller">
+        <button class="button addnode" id="btn-addnode"><p>Thêm đỉnh</p><i class="fas fa-plus-circle"></i></button>
+        <button class="button" id="btn-addedge"><p>Thêm cung</p><i class="fas fa-draw-polygon"></i></button>
+        <button class="button btn-noselect" id="btn-removenode"><p>Xóa</p><i class="fas fa-eraser"></i></button>
+        <label for="in-value" class="labelValue"><div class="inputKruskal" id="inputKruskal">Kruskal</div> VALUE</label>
+        <input type="text" class="inputValue" id="in-value" name="in-value">
+        <button class="button" id="btn-kruskal"><p>Chạy Kruskal</p><i class="fab fa-kickstarter-k"></i></button>
+        <button class="button" id="btn-file"><p>Tải file</p><i class="fas fa-file-download"></i></button>
+        <button class="button" id="btn-up"><p>Thêm file</p><i class="fas fa-file-upload"></i></button>
+        <button class="button" id="btn-clear"><p>Xóa màng hình</p><i class="fas fa-broom"></i></button>
+        <button class="button" id="btn-excel"><p>Xuất file Excel</p><i class="fas fa-file-excel"></i></button>
+    </div>
+    <div class="softedge" id="softedge"></div>
+    <div id="container_graph" class="container_graph"></div>
+    <div class="imgfile imgfile--unshow">
+        <div class="imgfile__off"></div>
+        <div class="imgfile__box">
+            <h4>Tải tệp txt lên</h4>
+            <input type="file" id="file-selector" multiple class="inputFile">
+        </div>
+    </div>
+    <table id="table2excel" style="display: none;">
+        <tr>
+            <th scope="col">Vị trí</th>
+            <th scope="col">Vị trí</th>
+            <th scope="col">Giá trị</th>
+        </tr>
+    </table>
+    <footer>
+        <div class="help" id="help">
+            <h1>Hướng dẫn sử dụng</h1>
+            <div>
+                <p>
+                <h3>Vẽ đỉnh: </h3> Chọn vào nút <button class="button"><i class="fas fa-plus-circle"></i></button>
+                sau đó click vào màng hình vẽ để tạo ra 1 đỉnh. <br>
+                <h3>Vẽ cung: </h3> Chọn vào nút <button class="button"><i class="fas fa-draw-polygon"></i></button>
+                sau đó click lần lược vào từng đỉnh cần tạo cung. <br>
+                <h3>Xóa đỉnh và cung: </h3> Click chọn 1 đỉnh hoặc 1 cung sau đó nhấn vào nút <button class="button"><i
+                        class="fas fa-eraser"></i></button>
+                để xóa đỉnh và cung đó. <br>
+                <h3>Thay đổi trọng số cung: </h3> Click chọn vào 1 cung sau đó ghi giá trị vào ô <img src="value.png"
+                    alt="">. <br>
+                <h3>Tìm cây khung Kruskal: </h3> Sau khi vẽ xong đồ thị, chọn vào nút <button class="button"><i
+                        class="fab fa-kickstarter-k"></i></button>
+                để chạy thuật toán tìm cây khung nhỏ nhất. <br>
+                <h3>Tải file lưu đồ thị: </h3> Chọn vào nút <button class="button"><i
+                        class="fas fa-file-download"></i></button>
+                để tải file txt về máy. <br>
+                <h3>Load file đồ thị đã lưu: </h3> Chọn vào nút <button class="button"><i
+                        class="fas fa-file-upload"></i></button>
+                sau đó chọn file txt đã lưu trong máy lên để hiển thị đồ thị đã lưu lên màng hình. <br>
+                <h3>Xóa màng hình: </h3> Chọn vào nút <button class="button"><i class="fas fa-broom"></i></button> để
+                xóa hàng hình. <br>
+                <h3>Tải file Excel: </h3> Chọn vào nút <button class="button"><i class="fas fa-file-excel"></i></button> để
+                tải File Excel về máy khi muốn lun kết quả.
+                </p>
+                <button class="button help__button"><a href="#header" class="button help__button"><i
+                            class="fas fa-arrow-up"></i></a></button>
+            </div>
+        </div>
+        <div class="author">
+            <div class="author__content">
+                <p>&#169;2021</p>
+                <p>ID Student: B1805739</p>
+                <p>Name: Bùi Việt Anh</p>
+                <p>Major: Software Engineering</p>
+                <p>Can Tho University</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script src="javascript.js"></script>
+<script>
+    //Nut them file
+    const upFileDiv = document.querySelector('.imgfile');
+    const fileOff = document.querySelector('.imgfile__off');
+    const UpFilebtn = document.getElementById('btn-up');
+    const FileInput = document.getElementById('file-selector');
+    UpFilebtn.addEventListener('click', function (event) {
+        upFileDiv.classList.remove('imgfile--unshow');
+    });
+    fileOff.addEventListener('click', function (event) {
+        upFileDiv.classList.add('imgfile--unshow');
+    });
+    FileInput.addEventListener('change', function (event) {
+        upFileDiv.classList.add('imgfile--unshow');
+    });
+</script>
+<script src="jquery.js"></script>
+<script src="jquery.table2excel.min.js"></script>
+<script>
+    $(document).ready(
+        function () {
+            //Hiệu ứng cuộn đến help biến mất tool
+            $(document).on('scroll', function () {
+                if ($(this).scrollTop() >= ($('footer').position().top - 300)) {
+                    $('.controller').addClass('controller__hiden');
+                }
+                else { $('.controller').removeClass('controller__hiden'); }
+            });
+            //Hiệu ứng cuộn khi nhấn vào thẻ <a>
+            $('a').click(function (event) {
+                $('html, body').animate({
+                    scrollTop: $($.attr(this, 'href')).offset().top
+                }, 500);
+                event.preventDefault();
+            });
+            //Xuất file excel
+            $("#btn-excel").click(function () {
+                $("#table2excel").table2excel({
+                    name: "Worksheet Name",
+                    filename: "KruskalExcel",
+                    fileext: ".xls"
+                });
+                var table = document.getElementById('table2excel');
+                table.innerHTML = '<tr><th scope="col">Vị trí</th><th scope="col">Vị trí</th><th scope="col">Giá trị</th></tr>';
+            });
+        }
+
+    )
+</script>
+
+</html>

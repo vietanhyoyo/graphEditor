@@ -1,0 +1,423 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: roboto;
+}
+:root{
+    --c1: #FF2442;
+    --c2: #3DB2FF;
+    --c3: #FFB830;
+    --c4: #FFEDDA;
+}
+/*:root{
+    --c1: #184D47;
+    --c2: #96BB7C;
+    --c3: #FAD586;
+    --c4: #D6EFC7;
+}*/
+/*:root{
+    --c1: #E93B81;
+    --c2: #B6C9F0;
+    --c3: #F5ABC9;
+    --c4: #FFE5E2;
+}*/
+/*:root{
+    --c1: #C68B59;
+    --c2: #8FC1D4;
+    --c3: #865439;
+    --c4: #FCDEC0;
+}*/
+/*:root{
+    --c1: #0A1931;
+    --c2: #185ADB;
+    --c3: #FFC947;
+    --c4: #EFEFEF;
+}*/
+body{
+    position: relative;
+}
+
+/*-------------------------------------------------------------*/
+.container_graph{
+    width: 1020px;
+    height: 700px;
+    margin: 0 auto;
+    position: relative;
+    background-color: var(--c4);
+    border-radius: 20px;
+    margin-top: 20px;
+    z-index: 0;
+}
+.node{
+    width: 30px;
+    height: 30px;
+    background-color: var(--c1);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.idnode{
+    width: 100%;
+    text-align: center;
+    user-select: none;
+}
+.edge{
+    height: 6px;
+    background-color: var(--c2);
+    position: absolute;
+    width: 30px;
+}
+.direct::after{
+    content: "";
+    display: block;
+    width:0px;
+    height:0px;
+    border-bottom:10px solid transparent;
+    border-top:10px solid transparent;
+    border-right:20px solid var(--c2); /* Tam giác phải được đổ màu */
+    transform: translate(9px, -7px);
+}
+.direct{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.pick{
+    border: 3px solid var(--c3);
+    color: var(--c3);
+    animation-name: aniNode;
+    animation-duration: 0.3s;
+}
+.edgevalue{
+    position: absolute;
+    text-align: center;
+}
+.edgePick{
+    background-color: var(--c3);
+    animation-name: aniEdge;
+    animation-duration: 0.3s;
+}
+.edgePick::after{
+    border-right:20px solid var(--c3);
+}
+@keyframes aniEdge {
+    0% {
+        background-color: var(--c1);
+        box-shadow: 0px 0px 20px var(--c2);
+    }
+    25% {
+        background-color: var(--c3);
+        box-shadow: 0px 0px 20px var(--c2);
+    }
+    100% {
+        background-color: var(--c3);
+    }
+}
+@keyframes aniNode {
+    0% {
+        border: 5px solid var(--c2);
+        color: var(--c3);
+        box-shadow: 0px 0px 20px var(--c2);
+        width: 40px;
+        height: 40px;
+        transform: translate(-5px,-5px);
+    }
+    25% {
+        border: 3px solid var(--c3);
+        box-shadow: 0px 0px 20px var(--c3);
+    }
+    100% {
+        border: 3px solid var(--c3);
+        color: var(--c3);
+    }
+}
+/*------------------------------------------------*/
+/*---------------------softedge----------------------*/
+.softedge{
+    position: absolute;
+    top: 40px;
+    padding-left: 20px;
+}
+.softedge__show::before{
+    content: "Soft";
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--c2);
+    text-shadow: 5px 5px 10px var(--c2);
+    animation-name: softTextAni;
+    animation-duration: 1s;
+}
+.softedge__element{
+    margin: 10px 0px;
+    width: 36px;
+    height: 36px;
+    background-color: var(--c2);
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border: 4px solid var(--c2);
+    z-index: 1;
+    animation-name: softAni;
+    animation-duration: 0.3s;
+}
+.softedge__element--pick{
+    box-shadow: 0px 0px 20px var(--c3);
+    border: 4px solid var(--c3);
+    animation-name: softAni;
+    animation-duration: 0.3s;
+}
+@keyframes softAni{
+    0% {
+        background-color: var(--c3);
+        box-shadow: 0px 0px 40px var(--c2);
+        border: 4px solid var(--c2);
+    }
+    25% {
+        background-color: var(--c3);
+        box-shadow: 0px 0px 60px var(--c3);
+        border: 4px solid var(--c3);
+    }
+    100% {
+        background-color: var(--c3);
+        box-shadow: 0px 0px 20px var(--c3);
+        border: 4px solid var(--c3);
+    }
+}
+@keyframes softTextAni{
+    0% {
+        content: "SOFT";
+        font-size: 30px;
+        font-weight: 900;
+        color: var(--c3);
+        text-shadow: 5px 5px 10px var(--c3);
+    }
+    20% {
+        content: "S0FT";
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--c1);
+        text-shadow: 5px 5px 10px var(--c3);
+    }
+    40%{
+        content: "SoFT";
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--c1);
+        text-shadow: 5px 5px 10px var(--c2);
+    }
+    100% {
+        content: "SofT";
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--c1);
+        text-shadow: 5px 5px 10px var(--c2);
+    }
+}
+/*---------------------------Controller---------------*/
+/*---------------------------Controller---------------*/
+.controller{
+    position: fixed;
+    width: 100px;
+    height: 400px;
+    right: 0px;
+    float: right;
+    padding-top: 50px;
+    z-index: 1;
+    text-align: center;
+}
+.controller__hiden{
+    display: none;
+}
+@keyframes ani {
+    0% {color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);}
+    20% {color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);}
+    100% {background-color: var(--c2);}
+  }
+.button{
+    background-color: var(--c1);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 0px;
+    font-size: 26px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 5px 0px 10px rgb(0, 0, 0,0.4);
+}
+.button span{
+    position: absolute;
+    font-size: 14px;
+    transform: translate(-16px,-8px);
+}
+.button p{
+    visibility: hidden;
+    position: absolute;
+    right: 0px;
+    font-size: 12px;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0);
+    user-select: none;
+    z-index: -1;
+}
+.button:hover p{
+    visibility: visible;
+    transform: translate(-78px,20%);
+    background-color: var(--c2);
+    animation-name: ani;
+    animation-duration: 1s;
+}
+.button:active{
+    background-color: var(--c3);
+}
+.btn-active{
+    background-color: var(--c3);
+}
+.btn-noselect{
+    background-color: #b1b1b1;
+    user-select: none;
+}
+.hiden{
+    visibility: hidden;
+}
+.labelValue{
+    display: inline;
+    width: 60px;
+    font-weight: 700;
+    text-align: center;
+    color: var(--c1);
+}
+.inputValue{
+    border-radius: 10px;
+    border: 2px solid #b1b1b1;
+    width: 60px;
+    text-align: center;
+    margin-bottom: 10px;
+    outline: none;
+}
+.inputKruskal{
+    display: none;
+}
+.inputKruskal--on{
+    display: block;
+    position: absolute;
+    color: white;
+    background-color: var(--c2);
+    font-weight: 900;
+    font-size: 20px;
+    padding: 3px;
+    transform: translate(-86px,10px);
+}
+.inputKruskal--on::after{
+    position: absolute;
+    border: 50%;
+    content: "";
+    display: block;
+    width:0px;
+    height:0px;
+    border-bottom:15px solid transparent;
+    border-top:15px solid transparent;
+    border-left:20px solid var(--c2); /* Tam giác phải được đổ màu */
+    transform: translate(70px, -27px);
+}
+.inputValue--k{
+    animation-name: valueAni;
+    animation-duration: 1s;
+    transition: all 0.5s;
+    font-size: 18px;
+    color: var(--c2);
+    box-shadow: 0px 0px 40px var(--c2);
+    border-color: var(--c2);
+}
+@keyframes valueAni{
+    0%{
+        font-size: 16px;
+        color: var(--c1);
+        box-shadow: 0px 0px 40px var(--c1);
+    }
+    25%{
+        font-size: 18px;
+        color: var(--c2);
+        box-shadow: 0px 0px 60px var(--c1);
+        height: 24px;
+    }
+    50%{
+        font-size: 18px;
+        color: var(--c2);
+        box-shadow: 0px 0px 40px var(--c3);
+        height: 26px;
+        border-color: var(--c2);
+    }
+    75%{
+        font-size: 18px;
+        color: var(--c2);
+        box-shadow: 0px 0px 20px var(--c2);
+        height: 24px;
+        border-color: var(--c2);
+    }
+    100%{
+        font-size: 16px;
+        color: var(--c2);
+        font-weight: 500;
+        box-shadow: 0px 0px 40px var(--c2);
+        border-color: var(--c2);
+    }
+}
+input[type=text]:focus{
+    border-color: var(--c1);
+}
+.buttonValue{
+    width: 60px;
+    height: 50px;
+    border: 0px;
+    background-color: var(--c1);
+    border-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.inputFile{
+    background-color: var(--c1);
+    color: #3DB2FF;
+}
+/*---------------------imgfile------------*/
+.imgfile{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+    top: 0;
+    transition: all 0.5s;
+}
+.imgfile__off{
+    background-color: rgba(0, 0, 0, 0.199);
+    height: 100%;
+    width: 100%;
+}
+.imgfile--unshow{
+    display: none;
+    transition: all 0.5s;
+    transform: translateY(-30px);
+}
+.imgfile h4{
+    width: 100%;
+    text-align: center;
+    padding-bottom: 20px;
+}
+.imgfile__box{
+    position: absolute;
+    top: 250px;
+    background-color: rgb(233, 233, 233);
+    padding: 20px;
+    height: min-content;
+    border-radius: 10px;
+    transition: all 1s;
+}
